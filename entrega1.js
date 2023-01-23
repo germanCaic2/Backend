@@ -20,15 +20,12 @@ class ProductManager {
   addProduct = (title, description, price, thumbnail, code, stock) => {
     let newProduct = new Product(title, description, price, thumbnail, code, stock);
     let error = `El elemento ${newProduct.title} con la ID: ${newProduct.code} ya existe`
-
-    if (!this.products.some(product => product.code === newProduct.code)) {
-      this.products.push(newProduct)
-    } else { console.log(error); }
+    !this.products.some(product => product.code === newProduct.code)? this.products.push(newProduct) :  console.log(error); 
   }
 
   getProductById = (ID) => {
-    let seach = this.products.find(prod => prod.code === ID)
-    return seach
+    this.products.find(prod => prod.code === ID) ? this.products : console.log("error")
+
   }
 }
 let productManager = new ProductManager();
