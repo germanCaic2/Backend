@@ -15,30 +15,30 @@ class ProductManager {
   constructor() {
     this.products = new Array();
   }
-  getProduct = () => { return this.products }
+  getProduct = () => { return this.products };
 
   addProduct = (title, description, price, thumbnail, code, stock) => {
     let newProduct = new Product(title, description, price, thumbnail, code, stock);
-    let error = `El elemento ${newProduct.title} con la ID: ${newProduct.code} ya existe`
+    let error = `El elemento ${newProduct.title} con la ID: ${newProduct.code} ya existe`;
     !this.products.some(product => product.code === newProduct.code) ? this.products.push(newProduct) : console.log(error);
   }
 
   getProductById = (ID) => {
-    let condition = (prod) => prod.code === ID
-    let position = this.products.findIndex(condition)
-    position === -1 ? console.log("No existe el elemento buscado por ID") : console.log(this.products[position])
+    let condition = (prod) => prod.code === ID;
+    let position = this.products.findIndex(condition);
+    position === -1 ? console.log("No existe el elemento buscado por ID") : console.log(this.products[position]);
   }
 }
 let productManager = new ProductManager();
 console.log(productManager.getProduct());
 
 productManager.addProduct("adidas sb", "Shoes", 2000, "adidas.jpg", code(), 20);
-productManager.addProduct("Balenciaga", "Shoes", 2300, "balenciaga.jpg", code(), 24);
 productManager.addProduct("Drunk sb", "Shoes", 2300, "nike.jpg", 11111, 20);
+productManager.addProduct("Balenciaga", "Shoes", 2300, "balenciaga.jpg", code(), 24);
 productManager.addProduct("Drunk sb (elemento repetido)", "Shoes", 2300, "nike.jpg", 11111, 20);
 
-console.log("-----------------------------------------------------------")
+console.log("-----------------------------------------------------------");
 console.log(productManager.getProduct());
 
-console.log("-----------------------------------------------------------")
+console.log("-----------------------------------------------------------");
 console.log(productManager.getProductById(11111));
