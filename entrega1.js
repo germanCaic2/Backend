@@ -23,10 +23,14 @@ class ProductManager {
 
     if (!this.products.some(product => product.code === newProduct.code)) {
       this.products.push(newProduct)
-    } else {console.log(error);}
+    } else { console.log(error); }
+  }
+
+  getProductById = (ID) => {
+    let seach = this.products.find(prod => prod.code === ID)
+    return seach
   }
 }
-
 let productManager = new ProductManager();
 console.log(productManager.getProduct());
 
@@ -37,3 +41,7 @@ productManager.addProduct("Drunk sb (elemento repetido)", "Shoes", 2300, "nike.j
 
 console.log("-----------------------------------------------------------")
 console.log(productManager.getProduct());
+
+console.log("-----------------------------------------------------------")
+console.log(productManager.getProductById(11111));
+
