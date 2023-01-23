@@ -33,8 +33,8 @@ let productManager = new ProductManager();
 console.log(productManager.getProduct());
 
 productManager.addProduct("adidas sb", "Shoes", 2000, "adidas.jpg", code(), 20);
-productManager.addProduct("Drunk sb", "Shoes", 2300, "nike.jpg", 11111, 20);
 productManager.addProduct("Balenciaga", "Shoes", 2300, "balenciaga.jpg", code(), 24);
+productManager.addProduct("Drunk sb", "Shoes", 2300, "nike.jpg", 11111, 20);
 productManager.addProduct("Drunk sb (elemento repetido)", "Shoes", 2300, "nike.jpg", 11111, 20);
 
 console.log("-----------------------------------------------------------");
