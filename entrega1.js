@@ -12,9 +12,8 @@ class Product {
 }
 
 class ProductManager {
-  constructor() {
-    this.products = new Array();
-  }
+  constructor() { this.products = new Array()};
+  
   getProduct = () => { return this.products };
 
   addProduct = (title, description, price, thumbnail, code, stock) => {
