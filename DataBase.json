@@ -1,0 +1,10 @@
+[
+  {
+    "title" : "title",
+    "description" : "description",
+    "price" : "price",
+    "thumbnail" : "thumbnail",
+    "code" : "code",
+    "stock" : "stock"
+  }
+]

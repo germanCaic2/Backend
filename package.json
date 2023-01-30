@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "file": "^0.2.2",
+    "system": "^2.0.1"
+  }
+}
