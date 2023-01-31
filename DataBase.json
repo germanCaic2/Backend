@@ -1,10 +1,42 @@
 [
   {
-    "title" : "title",
-    "description" : "description",
-    "price" : "price",
-    "thumbnail" : "thumbnail",
+    "title" : "Nike ",
+    "description" : "Sb",
+    "price" : "250.000",
+    "thumbnail" : "nikesb.png",
     "code" : "code",
-    "stock" : "stock"
+    "stock" : "23"
+  },
+  {
+    "title" : "Adidas",
+    "description" : "Sport",
+    "price" : "345.000",
+    "thumbnail" : "adidas.png",
+    "code" : "code",
+    "stock" : "24"
+  },
+  {
+    "title" : "New Balance",
+    "description" : "Clasic",
+    "price" : "230.000",
+    "thumbnail" : "newbalance.png",
+    "code" : "code",
+    "stock" : "25"
+  },
+  {
+    "title" : "Balenciaga",
+    "description" : "Triple S",
+    "price" : "300.000",
+    "thumbnail" : "balenciaga.png",
+    "code" : "code",
+    "stock" : "26"
+  },
+  {
+    "title" : "Puma",
+    "description" : "Sport",
+    "price" : "200.000",
+    "thumbnail" : "puma.png",
+    "code" : "code",
+    "stock" : "27"
   }
 ]
