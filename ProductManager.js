@@ -52,7 +52,7 @@ class ProductManager {
       this.products = JSON.parse(productsPath);
       console.log("Products not found:");
       console.log(this.products);
-      return this.products
+      return this.products;
     } catch (error) {
       console.error(`Error consulting the products by file, validate the file: ${this.products},error detail ${error}`);
       throw Error(`Error consulting the products by file, validate the file: ${this.products}, error detail ${error}`);
@@ -65,11 +65,33 @@ class ProductManager {
     const productId = this.products.find(p => p.id == id);
     if (productId) {
       console.log("Product found:");
-      console.log(productId)
+      console.log(productId);
     } else {
       console.warn("Product not found by id: " + productId);
     }
   }
+
+  updateProduct = async (id, newProduct) => {
+    await this.getProducts();
+    const updateProduct = this.products.map((prod) => {
+      if (prod.id === id) { return { ...prod, ...newProduct }; } else { return prod; }
+    });
+    this.products = updateProduct;
+
+    await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+    console.log(this.products);
+  }
+
+  deleteProduct = async (id) => {
+    await this.getProducts();
+    if (this.products.find((prod) => prod.id === id)) {
+      const delet = this.products.indexOf(id);
+      console.warn(delet)
+      this.products.splice(delet, 1);
+      console.log("se elimino el producto");
+      console.log(this.products);
+      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+    }
+  }
 }
 module.exports = ProductManager;
-// prueba
