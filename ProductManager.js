@@ -64,8 +64,8 @@ class ProductManager {
     await this.getProducts();
     const productId = this.products.find(p => p.id == id);
     if (productId) {
-      console.log("Product found: " + productId.title);
-
+      console.log("Product found:");
+      console.log(productId)
     } else {
       console.warn("Product not found by id: " + productId);
     }
