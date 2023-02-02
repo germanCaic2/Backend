@@ -1,1 +1,1 @@
-[{"id":2,"title":"vans","description":"description","price":"price","thumbnail":"thumbnail","code":1097,"stock":"stock"},{"id":2,"title":"vans","description":"description","price":"price","thumbnail":"thumbnail","code":280,"stock":"stock"}]
+[{"id":0,"title":"adidas","description":"sport","price":2400,"thumbnail":"adidas-sport.png","code":9963,"stock":22},{"id":1,"title":"nike","description":"sb","price":2900,"thumbnail":"nike-sb.png","code":9445,"stock":20},{"id":2,"title":"vans","description":"classic","price":2500,"thumbnail":"vans-classic.png","code":5237,"stock":23}]
