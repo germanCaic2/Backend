@@ -84,18 +84,13 @@ class ProductManager {
 
   deleteProduct = async (id) => {
     await this.getProducts();
-    try {
-      if (this.products.find((prod) => prod.id === id)) {
-        const delet = this.products.indexOf(id);
-        console.warn(delet)
-        this.products.splice(delet, 1);
-        console.log("se elimino el producto");
-        console.log(this.products);
-        await this.fileSystem.promises.writeFile(fileName, JSON.stringify(this.products));
-      }
-    } catch (error) {
-      console.error(`Error consulting the products by file, validate the file: ${this.products},error detail ${error}`);
-      throw Error(`Error consulting the products by file, validate the file: ${this.products}, error detail ${error}`);
+    if (this.products.find((prod) => prod.id === id)) {
+      const delet = this.products.indexOf(id);
+      console.warn(delet)
+      this.products.splice(delet, 1);
+      console.log("se elimino el producto");
+      console.log(this.products);
+      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
     }
   }
 }
