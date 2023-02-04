@@ -61,36 +61,51 @@ class ProductManager {
   }
 
   getProductById = async (id) => {
-    await this.getProducts();
-    const productId = this.products.find(p => p.id == id);
-    if (productId) {
-      console.log("Product found:");
-      console.log(productId);
-    } else {
-      console.warn("Product not found by id: " + productId);
+    try {
+      await this.getProducts();
+      const productId = this.products.find(p => p.id == id);
+      if (productId) {
+        console.log("Product found:");
+        console.log(productId);
+      } else {
+        console.warn("Product not found by id: " + productId);
+      }
+    } catch (error) {
+      console.error(`Error consulting the products by specific ID: ${this.id}, error detail ${error}`);
+      throw Error(`Error consulting the products by specific ID: ${this.id}, error detail ${error}`);
     }
   }
 
   updateProduct = async (id, newProduct) => {
-    await this.getProducts();
-    const updateProduct = this.products.map((prod) => {
-      if (prod.id === id) { return { ...prod, ...newProduct }; } else { return prod; }
-    });
-    this.products = updateProduct;
-
-    await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
-    console.log(this.products);
+    try {
+      await this.getProducts();
+      const updateProduct = this.products.map((prod) => {
+        if (prod.id === id) { return { ...prod, ...newProduct }; } else { return prod; }
+      });
+      this.products = updateProduct;
+      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+      console.log(`Product whit ID: ${id} was updated.`)
+      console.log(this.products);
+    } catch (error) {
+      console.error(`Error updating the product by specific ID: ${this.id}, error detail ${error}`);
+      throw Error(`Error updating the product by specific ID: ${this.id}, error detail ${error}`);
+    }
   }
 
   deleteProduct = async (id) => {
-    await this.getProducts();
-    if (this.products.find((prod) => prod.id === id)) {
-      const delet = this.products.indexOf(id);
-      console.warn(delet)
-      this.products.splice(delet, 1);
-      console.log("se elimino el producto");
-      console.log(this.products);
-      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+    try {
+      await this.getProducts();
+      if (this.products.find((prod) => prod.id === id)) {
+        const delet = this.products.indexOf(id);
+        console.warn(delet)
+        this.products.splice(delet, 1);
+        console.log("the product whit Id: " + id + " was deleted.");
+        console.log(this.products);
+        await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+      }
+    } catch (error) {
+      console.error(`Error deleting  the product by specific ID: ${this.id}, error detail ${error}`);
+      throw Error(`Error deleting  the product by specific ID: ${this.id}, error detail ${error}`);
     }
   }
 }
