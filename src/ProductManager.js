@@ -1,3 +1,4 @@
+const fs = require("fs");
 class Product {
   static id = 0;
   static code = () => parseInt(Math.random() * 10000);
@@ -13,30 +14,29 @@ class Product {
 }
 
 class ProductManager {
+  static productsDirPath = "../database";
+  static productsFilePath = ProductManager.productsDirPath + "/products.json";
   constructor() {
     this.products = new Array();
-    this.productsDirPath = "./database";
-    this.productsFilePath = this.productsDirPath + "/products.json";
-    this.fileSystem = require("fs");
   }
 
   fileCreator = async () => {
-    await this.fileSystem.promises.mkdir(this.productsDirPath, { recursive: true });
-    if (!this.fileSystem.existsSync(this.productsFilePath)) {
-      await this.fileSystem.promises.writeFile(this.productsFilePath, "[]");
+    await fs.promises.mkdir(ProductManager.productsDirPath, { recursive: true });
+    if (!fs.existsSync(ProductManager.productsFilePath)) {
+      await fs.promises.writeFile(ProductManager.productsFilePath, "[]");
     }
   }
 
   addProduct = async (title, description, price, thumbnail, stock) => {
     let newProduct = new Product(title, description, price, thumbnail, stock);
-    console.log("Creating new product:");
+    console.log(`Creating new product:`);
     console.log(newProduct);
     try {
       await this.fileCreator();
       this.products.push(newProduct);
       console.log("Updating products list:");
       console.log(this.products);
-      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+      await fs.promises.writeFile(ProductManager.productsFilePath, JSON.stringify(this.products));
     } catch (error) {
       console.error(Error`Creating new product" ${JSON.stringify(newProduct)}, error detail: ${error}`);
       throw Error(Error`Creating new product:" ${JSON.stringify(newProduct)}, error detail: ${error}`);
@@ -46,18 +46,16 @@ class ProductManager {
   getProducts = async () => {
     try {
       await this.fileCreator();
-      let productsPath = await this.fileSystem.promises.readFile(this.productsFilePath, "utf-8");
+      let productsPath = await fs.promises.readFile(ProductManager.productsFilePath, "utf-8");
       console.info("JSON file obtained from file:");
       console.log(productsPath);
       this.products = JSON.parse(productsPath);
-      console.log("Products not found:");
       console.log(this.products);
       return this.products;
     } catch (error) {
       console.error(`Error consulting the products by file, validate the file: ${this.products},error detail ${error}`);
       throw Error(`Error consulting the products by file, validate the file: ${this.products}, error detail ${error}`);
     }
-
   }
 
   getProductById = async (id) => {
@@ -65,7 +63,7 @@ class ProductManager {
       await this.getProducts();
       const productId = this.products.find(p => p.id == id);
       if (productId) {
-        console.log("Product found:");
+        console.log("Product found by ID:");
         console.log(productId);
       } else {
         console.warn("Product not found by id: " + productId);
@@ -83,7 +81,7 @@ class ProductManager {
         if (prod.id === id) { return { ...prod, ...newProduct }; } else { return prod; }
       });
       this.products = updateProduct;
-      await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+      await fs.promises.writeFile(ProductManager.productsFilePath, JSON.stringify(this.products));
       console.log(`Product whit ID: ${id} was updated.`)
       console.log(this.products);
     } catch (error) {
@@ -101,7 +99,7 @@ class ProductManager {
         this.products.splice(delet, 1);
         console.log("the product whit Id: " + id + " was deleted.");
         console.log(this.products);
-        await this.fileSystem.promises.writeFile(this.productsFilePath, JSON.stringify(this.products));
+        await fs.promises.writeFile(ProductManager.productsFilePath, JSON.stringify(this.products));
       }
     } catch (error) {
       console.error(`Error deleting  the product by specific ID: ${this.id}, error detail ${error}`);
@@ -109,4 +107,5 @@ class ProductManager {
     }
   }
 }
+
 module.exports = ProductManager;
