@@ -3,5 +3,23 @@
     "express": "^4.18.2",
     "file": "^0.2.2",
     "system": "^2.0.1"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "entrega2",
+  "version": "1.0.0",
+  "main": "ProductManager.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/germanCaiced6/entrega1-JS.git"
+  },
+  "keywords": [],
+  "author": "germanCaiced6",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/germanCaiced6/entrega1-JS/issues"
+  },
+  "homepage": "https://github.com/germanCaiced6/entrega1-JS#readme",
+  "description": "Tarea de backend"
 }
