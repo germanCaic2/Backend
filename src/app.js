@@ -20,9 +20,7 @@ app.get("/products/:pid", (request, response) => {
 
 app.get("/product/query", (request, response) => {
   let limit = request.query.limit;
-  if(limit) {
-    response.send(products.filter(p => p.id <= limit -1))
-  }
+  limit ? response.send(products.filter(p => p.id <= limit - 1)) : response.send({ message: "Product not found" });
 });
 
 const SERVER_PORT = 8080;
