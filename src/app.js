@@ -13,9 +13,16 @@ app.get("/products", (request, response) => {
   response.send(products)
 });
 
-app.get("/products/:id", (request, response) => {
-  const product = products.find(p => p.id == request.params.id);
+app.get("/products/:pid", (request, response) => {
+  const product = products.find(p => p.id == request.params.pid);
   product ? response.send(product) : response.send({ message: "Product not found" });
+});
+
+app.get("/product/query", (request, response) => {
+  let limit = request.query.limit;
+  if(limit) {
+    response.send(products.filter(p => p.id <= limit -1))
+  }
 });
 
 const SERVER_PORT = 8080;
