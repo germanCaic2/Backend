@@ -6,20 +6,16 @@ const productManager = new ProductManager;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// const getProducts = async () =>{
-//   products = await productManager.getProducts();
-//   return products
-// }
+const getProducts = async () => products = await productManager.getProducts();
+getProducts()
 
 app.get("/products", (request, response) => {
-  const getProducts = async () => products = await productManager.getProducts();
-  getProducts()
   response.send(products)
 });
 
 app.get("/products/:id", (request, response) => {
-  const prod = products.find(p => p.id == request.params.id);
-  if (prod) { response.send(prod) } response.send({ message: "User not found" });
+  const product = products.find(p => p.id == request.params.id);
+  product ? response.send(product) : response.send({ message: "Product not found" });
 });
 
 const SERVER_PORT = 8080;
