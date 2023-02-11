@@ -9,14 +9,16 @@ app.use(express.urlencoded({ extended: true }));
 const getProducts = async () => products = await productManager.getProducts();
 getProducts();
 
-app.get("/products", (request, response) => { response.send(products); });
+app.get("/products", (request, response) => {response.send(products);});
+
+const getProductsByID = async (id) => getProductByID = await productManager.getProductById(id);
 
 app.get("/products/:pid", (request, response) => {
-  const product = products.find(p => p.id == request.params.pid);
-  product ? response.send(product) : response.send({ message: "Product not found" });
+  getProductsByID(parseInt(request.params.pid))
+  response.send(getProductByID);
 });
 
-app.get("/product/:query", (request, response) => {
+app.get("/products:query", (request, response) => {
   let limit = request.query.limit;
   limit ? response.send(products.filter(p => p.id <= limit - 1)) : response.send(products);
 });
