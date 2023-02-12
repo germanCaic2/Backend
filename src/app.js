@@ -1,26 +1,29 @@
 import express  from "express";
-const app = express();
 import ProductManager from "./ProductManager.js"
+
+const app = express();
 const productManager = new ProductManager();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+let products = [];
+let getProductByID = [];
 
 const getProducts = async () => products = await productManager.getProducts();
 getProducts();
 
 app.get("/products", (request, response) => {response.send(products);});
 
-const getProductsByID = async (id) => getProductByID = await productManager.getProductById(id);
-
 app.get("/products/:pid", (request, response) => {
+  const getProductsByID = async (id) => getProductByID = await productManager.getProductById(id);
   getProductsByID(parseInt(request.params.pid))
   response.send(getProductByID);
 });
 
 app.get("/products:query", (request, response) => {
   let limit = request.query.limit;
-  limit ? response.send(products.filter(p => p.id <= limit - 1)) : response.send(products);
+  console.log(limit)
 });
 
 const SERVER_PORT = 8080;
