@@ -1,7 +1,7 @@
-const express = require('express');
+import express  from "express";
 const app = express();
-const ProductManager = require('./ProductManager');
-const productManager = new ProductManager;
+import ProductManager from "./ProductManager.js"
+const productManager = new ProductManager();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
