@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs'
 class Product {
   static id = 0;
   static code = () => parseInt(Math.random() * 10000);
@@ -109,4 +109,4 @@ class ProductManager {
   }
 }
 
-module.exports = ProductManager;
+export default ProductManager;
