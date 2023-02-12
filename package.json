@@ -5,11 +5,11 @@
     "system": "^2.0.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./src/app.js"
   },
-  "name": "entrega2",
+  "name": "entrega3",
   "version": "1.0.0",
-  "main": "ProductManager.js",
+  "main": "./src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/germanCaiced6/entrega1-JS.git"

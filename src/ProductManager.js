@@ -14,7 +14,7 @@ class Product {
 }
 
 class ProductManager {
-  static productsDirPath = "../database";
+  static productsDirPath = "./database";
   static productsFilePath = ProductManager.productsDirPath + "/products.json";
   constructor() {
     this.products = new Array();
