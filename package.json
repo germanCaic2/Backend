@@ -21,5 +21,6 @@
     "url": "https://github.com/germanCaiced6/entrega1-JS/issues"
   },
   "homepage": "https://github.com/germanCaiced6/entrega1-JS#readme",
-  "description": "Tarea de backend"
+  "description": "Tarea de backend",
+  "type": "module"
 }
