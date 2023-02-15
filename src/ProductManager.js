@@ -1,22 +1,24 @@
 import fs from 'fs'
 
 class Product {
-  static id = 0;
   static code = () => parseInt(Math.random() * 10000);
-  constructor(title, description, price, thumbnail, stock) {
-    this.id = Product.id++;
+  constructor(id, title, description, price, status, stock, category, thumbnail) {
+    this.id = id;
     this.title = title;
     this.description = description;
-    this.price = price;
-    this.thumbnail = thumbnail;
     this.code = Product.code();
+    this.price = price;
+    this.status = status;
     this.stock = stock;
+    this.category = category;
+    this.thumbnail = thumbnail;
   }
 }
 
 class ProductManager {
   static productsDirPath = "./database";
   static productsFilePath = ProductManager.productsDirPath + "/products.json";
+  
   constructor() {
     this.products = new Array();
   }
@@ -28,8 +30,10 @@ class ProductManager {
     }
   }
 
-  addProduct = async (title, description, price, thumbnail, stock) => {
-    let newProduct = new Product(title, description, price, thumbnail, stock);
+  addProduct = async (title, description, price, status, stock, category, thumbnail) => {
+    await this.getProducts()
+    let id = this.products.length
+    let newProduct = new Product(id, title, description, price, status, stock, category, thumbnail);
     console.log(`Creating new product:`);
     console.log(newProduct);
     try {
