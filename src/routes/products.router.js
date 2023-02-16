@@ -41,7 +41,7 @@ router.delete(`/:pid`, async (req, res) => {
   res.send(`Product whit ID: ${id} was deleted`)
 })
 
-router.get(`/a/:query`, async (req, res) => {
+router.get(`/limit/:query`, async (req, res) => {
   await productManager.getProducts()
   let limit = (parseInt(req.query.limit) - 1);
   let productLimit = []
