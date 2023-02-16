@@ -25,15 +25,9 @@ router.post(`/`, async (req, res) => {
   };
   const { title, description, price, status, stock, category, thumbnail } = req.body;
   addProduct(title, description, price, status, stock, category, thumbnail);
-  res.send('ok');
+  res.send('New product added ' + title);
 });
 // Recibe un JSON con los nuevos datos 
-router.put(`/:pid`, async (req, res) => {
-  const id = (parseInt(req.params.pid))
-  const newProduct = req.body;
-  const updateProduct = async (id, newProduct) => { updateProduct = await productManager.updateProduct(id, newProduct) }
-  updateProduct(id, newProduct)
-})
 // {
 //   "title": "POSTMAN",
 //   "description": "POSTMAN",
@@ -43,9 +37,28 @@ router.put(`/:pid`, async (req, res) => {
 //   "category": "POSTMAN",
 //   "status": true
 // }
-router.delete(`/:pid`, async(req, res)=>{
+router.put(`/:pid`, async (req, res) => {
+  const id = (parseInt(req.params.pid))
+  const newProduct = req.body;
+  const updateProduct = async (id, newProduct) => { updateProduct = await productManager.updateProduct(id, newProduct) }
+  updateProduct(id, newProduct)
+  res.send(products[id])
+})
+
+router.delete(`/:pid`, async (req, res) => {
   const id = (parseInt(req.params.pid))
   console.log(id)
   productManager.deleteProduct(id)
+  res.send(`Product whit ID: ${id} was deleted`)
 })
+
+router.get(`/a/:query`, async(req, res) => {
+  let limit = (parseInt(req.query.limit) - 1);
+  let productLimit = []
+  if (limit <= products.length) {
+    for (let i = 0; i <= limit; i++) { productLimit.push(products[i]) }
+    res.send(productLimit)
+  } else { res.send(products) }
+});
+
 export default router;
