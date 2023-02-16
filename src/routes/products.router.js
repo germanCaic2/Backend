@@ -26,8 +26,6 @@ const addProduct = async (title, description, price, status, stock, category, th
 }
 
 router.post(`/`, (req, res)=>{
-  const R = (req.body)
-  console.log(R)
   const {title, description, price, status, stock, category, thumbnail } = req.body
   addProduct(title, description, price, status, stock, category, thumbnail )
   res.send('ok')
