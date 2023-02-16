@@ -25,8 +25,17 @@ class CartManager {
     await this.getCart();
     let id = this.cart.length
     let newCart = new Cart(id);
+    console.log(`Creating new cart:`);
     console.log(newCart);
-    this.cart.push(newCart);
+    try {
+      this.cart.push(newCart);
+      console.log("Updating cart list:")
+      console.log(this.cart);
+      await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
+    } catch (error) {
+      console.error(Error`Creating new product" ${JSON.stringify(newProduct)}, error detail: ${error}`);
+      throw Error(Error`Creating new product:" ${JSON.stringify(newProduct)}, error detail: ${error}`);
+    }
   }
 
   getCart = async () => {
