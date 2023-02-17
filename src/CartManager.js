@@ -53,6 +53,44 @@ class CartManager {
       throw Error(`Error consulting the carts by file, validate the file: ${this.cart}, error detail ${error}`);
     }
   }
+
+  getCartById = async (id) => {
+    try {
+      await this.getCart();
+      const cartId = this.cart.find(c => c.id == id);
+      if (cartId) {
+        console.log("Cart found by ID:")
+        console.log(cartId);
+        return cartId
+      } else {
+        console.warn("Cart not found by ID" + id);
+      }
+    } catch (error) {
+      console.error(`Error consulting the cart by specific ID: ${this.id}, error detail ${error}`);
+      throw Error(`Error consulting the cart by specific ID: ${this.id}, error detail ${error}`);
+    }
+  }
+
+  cartBuilder = async (cart, product) => {
+    await this.getCart()
+    const { id } = product
+    const item = { "id": id, "quantity": 1 }
+
+    try {
+      const repeated = cart.products.find(p => p.id == id);
+      if (repeated) {
+        repeated.quantity++
+      } else { cart.products.push(item); }
+      console.log(cart)
+      // se repite el objeto porque en cada ejecucion se hace un push, agregar condicional
+      this.cart.push(cart)
+      await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
+    } catch (error) {
+      console.error(`Error building the cart by specific ID: ${this.id}, error detail ${error}`);
+      throw Error(`Error building the cart by specific ID: ${this.id}, error detail ${error}`);
+    }
+
+  }
 }
 
 export default CartManager;

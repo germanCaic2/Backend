@@ -72,7 +72,7 @@ class ProductManager {
         console.log(productId);
         return productId
       } else {
-        console.warn("Product not found by id: " + productId + id);
+        console.warn("Product not found by ID: " + id);
       }
     } catch (error) {
       console.error(`Error consulting the products by specific ID: ${this.id}, error detail ${error}`);
