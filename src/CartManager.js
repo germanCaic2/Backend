@@ -14,6 +14,7 @@ class CartManager {
   constructor() {
     this.cart = new Array;
   }
+
   fileCreator = async () => {
     await fs.promises.mkdir(CartManager.cartsDirPath, { recursive: true });
     if (!fs.existsSync(CartManager.cartsFilePath)) {
@@ -35,7 +36,7 @@ class CartManager {
     } catch (error) {
       console.error(Error`Creating new product" ${JSON.stringify(newProduct)}, error detail: ${error}`);
       throw Error(Error`Creating new product:" ${JSON.stringify(newProduct)}, error detail: ${error}`);
-    }
+    } finally { return newCart }
   }
 
   getCart = async () => {
