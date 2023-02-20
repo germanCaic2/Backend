@@ -7,22 +7,23 @@ const productManager = new ProductManager();
 
 router.post(`/`, async (req, res) => {
   let newProduct = await cartManager.addCart();
-  let { id, procucts } = newProduct;
+  let { id } = newProduct;
   res.send(`New cart created whit ID: ${id}`);
 });
 
 router.get(`/:cid`, async (req, res) => {
-  const id = parseInt(req.params.cid)
-  const cartById = await cartManager.getCartById(id)
-  res.send(cartById)
+  const id = parseInt(req.params.cid);
+  const cartById = await cartManager.getCartById(id);
+  res.send(cartById);
 });
 
 router.post(`/:cid/product/:pid`, async (req, res) => {
-  const cid = parseInt(req.params.cid)
-  const pid = parseInt(req.params.pid)
-  const p = productManager.getProductById(pid)
-  const c = cartManager.getCartById(cid)
-  console.log(p)
-})
+  const cid = parseInt(req.params.cid);
+  const pid = parseInt(req.params.pid);
+  const p = await productManager.getProductById(pid);
+  const c = await cartManager.getCartById(cid);
+  await cartManager.cartBuilder(c, p);
+  response.status(200).json(cart);
+});
 
 export default router;
