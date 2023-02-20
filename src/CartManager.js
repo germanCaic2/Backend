@@ -1,3 +1,4 @@
+import { Console } from 'console';
 import fs from 'fs'
 
 class Cart {
@@ -72,24 +73,15 @@ class CartManager {
   }
 
   cartBuilder = async (cart, product) => {
-    await this.getCart()
-    const { id } = product
-    const item = { "id": id, "quantity": 1 }
-
-    try {
-      const repeated = cart.products.find(p => p.id == id);
-      if (repeated) {
-        repeated.quantity++
-      } else { cart.products.push(item); }
-      console.log(cart)
-      // se repite el objeto porque en cada ejecucion se hace un push, agregar condicional
-      this.cart.push(cart)
-      await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
-    } catch (error) {
-      console.error(`Error building the cart by specific ID: ${this.id}, error detail ${error}`);
-      throw Error(`Error building the cart by specific ID: ${this.id}, error detail ${error}`);
-    }
-
+    await this.getCart();
+    const { id } = product;
+    const item = { "id": id, "quantity": 1 };
+    const repeated = cart.products.find(p => p.id == id);
+    repeated ? repeated.quantity++ : cart.products.push(item);
+    const updateCart = this.cart.map((c) => { if (c.id === cart.id) { return cart; } else { return c } });
+    this.cart = updateCart
+    console.log(this.cart)
+    await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
   }
 }
 

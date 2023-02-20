@@ -5,12 +5,10 @@ const test = async () => {
   // await cartManager.getCart()
   // await cartManager.addCart()
   // await cartManager.addCart()
-  // await cartManager.addCart()
-  // await cartManager.addCart()
-  await cartManager.getCartById(1)
-  let c = { id: 2, products: [] }
-  let p = {
-    id: 5,
+  // await cartManager.getCartById(2)
+  let cart = { id: 2, products: [] }
+  let product = {
+    id: 55,
     title: "Vans",
     description: "classic",
     price: 2500,
@@ -20,11 +18,10 @@ const test = async () => {
     category: "SkateBoard",
     status: true
   }
-  await cartManager.cartBuilder(c, p)
-  await cartManager.cartBuilder(c, p)
-  await cartManager.cartBuilder(c, p)
-  await cartManager.cartBuilder(c, p)
-  // await cartManager.getCart()
+  await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
 }
 
 test()
