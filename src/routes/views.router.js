@@ -6,7 +6,11 @@ const productManager = new ProductManager();
 const Products = await productManager.getProducts();
 
 router.get(`/`,(req, res)=>{
-  res.render('home',{Products:Products[4]})
+  res.render('home',{Products:Products})
+});
+
+router.get(`/realtimeproducts/`,(req, res)=>{
+  res.render('realTimeProducts',{Products:Products})
 });
 
 export default router;

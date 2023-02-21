@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    {{#each Products}}
+    <div class="col-lg-4 d-flex justify-content-center align-item-center p-5">
+      <div class="card shadow" style="width: 18rem;">
+        <img src="{{thumbnail}}" class="card-img-top" alt="thumbnail: {{thumbnail}}">
+        <div class="card-body">
+          <h5 class="card-title">Title: {{title}}</h5>
+          <p class="card-text">Description: {{description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price: {{price}}</li>
+          <li class="list-group-item">Status: {{status}}</li>
+          <li class="list-group-item">Category: {{category}}</li>
+        </ul>
+      </div>
+    </div>
+    {{/each }}
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
