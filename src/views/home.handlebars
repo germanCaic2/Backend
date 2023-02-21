@@ -1,9 +1,18 @@
-<div>
-  <h1>Products</h1>
-  <p>title: {{Products.title}} </p>
-  <p>description: {{Products.description}} </p>
-  <p>price: {{Products.price}} </p>
-  <p>status: {{Products.status}} </p>
-  <p>category: {{Products.category}} </p>
-  <p>thumbnail: {{Products.thumbnail}} </p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center align-item-center p-5">
+      <div class="card shadow" style="width: 18rem;">
+        <img src="{{Products.thumbnail}}" class="card-img-top" alt="thumbnail: {{Products.thumbnail}}">
+        <div class="card-body">
+          <h5 class="card-title">Title: {{Products.title}}</h5>
+          <p class="card-text">Description: {{Products.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price: {{Products.price}}</li>
+          <li class="list-group-item">Status: {{Products.status}}</li>
+          <li class="list-group-item">Category: {{Products.category}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

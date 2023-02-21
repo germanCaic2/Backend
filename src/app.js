@@ -1,13 +1,10 @@
 import express from 'express';
-import handlebars from 'express-handlebars'
 import __dirname from './util.js'
 import { Server } from 'socket.io';
+import handlebars from 'express-handlebars'
 import ProductsRouter from './routes/products.router.js'
 import CartsRouter from './routes/carts.router.js'
-import ProductManager from './ProductManager.js';
-
-const productManager = new ProductManager()
-const Products = await productManager.getProducts()
+import ViewsRouter from './routes/views.router.js'
 
 const app = express();
 
@@ -22,10 +19,7 @@ app.use(express.static(__dirname+'/public'))
 
 app.use(`/api/products`, ProductsRouter);
 app.use(`/api/carts`, CartsRouter);
-
-app.get(`/`,(req, res)=>{
-  res.render('home',{Products:Products[6]})
-})
+app.use(`/views`, ViewsRouter);
 
 const SERVER_PORT = 8080;
 const httpServer = app.listen(SERVER_PORT, () => {
