@@ -90,5 +90,4 @@ class CartManager {
   };
 };
 
-// hace falta que sume los datos del database
 export default CartManager;
