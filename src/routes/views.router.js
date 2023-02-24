@@ -4,7 +4,7 @@ import ProductManager from '../ProductManager.js';
 const router = Router();
 const productManager = new ProductManager();
 const Products = await productManager.getProducts();
-
+// Show all products
 router.get(`/`,(req, res)=>{
   res.render('home',{Products:Products})
 });

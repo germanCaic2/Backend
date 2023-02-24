@@ -4,8 +4,8 @@ class Cart {
   constructor(id) {
     this.id = id;
     this.products = new Array;
-  }
-}
+  };
+};
 
 class CartManager {
   static cartsDirPath = "./database";
@@ -13,14 +13,14 @@ class CartManager {
 
   constructor() {
     this.cart = new Array;
-  }
+  };
 
   fileCreator = async () => {
     await fs.promises.mkdir(CartManager.cartsDirPath, { recursive: true });
     if (!fs.existsSync(CartManager.cartsFilePath)) {
       await fs.promises.writeFile(CartManager.cartsFilePath, "[]");
-    }
-  }
+    };
+  };
 
   addCart = async () => {
     await this.getCart();

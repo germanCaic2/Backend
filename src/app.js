@@ -15,7 +15,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // public folder
-app.use(express.static(__dirname+'/public'))
+app.use(express.static(__dirname+'/public'));
 // Routers
 app.use(`/api/products`, ProductsRouter);
 app.use(`/api/carts`, CartsRouter);
@@ -24,7 +24,7 @@ app.use(`/api/views`, ViewsRouter);
 const SERVER_PORT = 8080;
 const httpServer = app.listen(SERVER_PORT, () => {
   console.log(`Server running in port ${SERVER_PORT}`);
-  console.log(__dirname)
+  console.log(__dirname);
 });
 
 const socketServer = new Server(httpServer);
@@ -33,7 +33,7 @@ socketServer.on('connection', socket => {
   console.log("new user conected:");
 
   socket.on("m", data => {
-    console.log(data)
+    console.log(data);
   });
 
   // socket.on('Product', data =>{
