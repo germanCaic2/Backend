@@ -38,12 +38,13 @@ const socketServer = new Server(httpServer);
 socketServer.on('connection', socket => {
   console.log("new user conected:");
 
-  socket.on("m", data => {
+  socket.on("message", data => {
     console.log(data);
   });
 
-  socket.on('checkJson',async () => { 
+  socket.on('checkJson',async (data) => { 
     socket.emit('updateJson', productManager.products)
+    console.log(data)
   });
 });
 

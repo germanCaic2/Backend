@@ -1,9 +1,8 @@
 const socket = io();
-
-
-socket.emit("m", 'HOLAAAAAAAAAAAAAAAAAAA')
-socket.emit('checkJson', 'Products')
+socket.emit("message", 'HOLAAAAAAAAAAAAAAAAAAA')
+socket.emit('checkJson', "Products")
 
 socket.on('updateJson', (data) => {
   console.log(data)
+  socket.emit('checkJson', data )
 });
