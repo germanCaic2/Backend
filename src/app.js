@@ -5,8 +5,14 @@ import handlebars from 'express-handlebars';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
+import ProductManager from './ProductManager.js';
+import fs from 'fs';
 
 const app = express();
+const productManager = new ProductManager();
+productManager.getProducts();
+const DB = productManager.products;
+
 // handlebars use
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname + "/views");
@@ -15,7 +21,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // public folder
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname + '/public'));
 // Routers
 app.use(`/api/products`, ProductsRouter);
 app.use(`/api/carts`, CartsRouter);
@@ -36,9 +42,9 @@ socketServer.on('connection', socket => {
     console.log(data);
   });
 
-  // socket.on('Product', data =>{
-  //   console.log("---------------")
-  //   console.log(Products)
-  //   socketServer.emit('Product', data);
-  // });
+  socket.on('checkJson',async () => { 
+    socket.emit('updateJson', productManager.products)
+  });
 });
+
+
