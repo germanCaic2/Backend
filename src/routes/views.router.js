@@ -11,7 +11,7 @@ router.get(`/`, async (req, res) => {
 });
 
 router.get(`/realtimeproducts/`, (req, res) => {
-  res.render('realTimeProducts', {})
+  res.render('realTimeProducts')
 });
 
 export default router;
