@@ -8,7 +8,7 @@ const test = async () => {
   // await cartManager.getCartById(2)
   let cart = { id: 0, products: [] }
   let product = {
-    id: 5,
+    id: 4,
     title: "Vans",
     description: "classic",
     price: 2500,
@@ -19,9 +19,9 @@ const test = async () => {
     status: true
   }
   await cartManager.cartBuilder(cart, product)
-  // await cartManager.cartBuilder(cart, product)
-  // await cartManager.cartBuilder(cart, product)
-  // await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
+  await cartManager.cartBuilder(cart, product)
 }
 
 test()

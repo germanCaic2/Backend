@@ -4,8 +4,8 @@ class Cart {
   constructor(id) {
     this.id = id;
     this.products = new Array;
-  }
-}
+  };
+};
 
 class CartManager {
   static cartsDirPath = "./database";
@@ -13,14 +13,14 @@ class CartManager {
 
   constructor() {
     this.cart = new Array;
-  }
+  };
 
   fileCreator = async () => {
     await fs.promises.mkdir(CartManager.cartsDirPath, { recursive: true });
     if (!fs.existsSync(CartManager.cartsFilePath)) {
       await fs.promises.writeFile(CartManager.cartsFilePath, "[]");
-    }
-  }
+    };
+  };
 
   addCart = async () => {
     await this.getCart();
@@ -73,18 +73,21 @@ class CartManager {
 
   cartBuilder = async (cart, product) => {
     await this.getCart();
-    const { id } = product;
-    const item = { "id": id, "quantity": 1 };
-    const repeated = cart.products.find(p => p.id == id);
-    repeated ? repeated.quantity++ : cart.products.push(item);
-    const updateCart = this.cart.map((c) => {
-      if (c.id === cart.id) { return cart; } else { return c };
-    });
-    this.cart = updateCart;
-    console.log(this.cart);
+    const { id } = cart;
+    const existingCart = this.cart.find(c => c.id === id);
+    if (!existingCart) { throw new Error(`Cart not found whit specific ID ${id}`);};
+    const existingProduct = existingCart.products.find(p => p.id === product.id);
+    if (existingProduct) {
+      existingProduct.quantity++;
+      console.log(`1 unit of the product with ID: ${product.id} has been added to the cart with ID: ${id}.`);
+    } else {
+      const item = { "id": product.id, "quantity": 1 };
+      existingCart.products.push(item);
+      console.log(`Product with ID: ${product.id} has been added to cart with ID: ${id}.`);
+    };
+  
     await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
-  }
-}
+  };
+};
 
-// hace falta que sume los datos del database
 export default CartManager;

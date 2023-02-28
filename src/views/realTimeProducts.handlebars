@@ -1,4 +1,4 @@
-<div class="container mt-4 py-3">
+{{!-- <div class="container mt-4 py-3">
   <div class="row">
 
     <div class="col-lg-4 shadow py-4 rounded">
@@ -114,27 +114,12 @@
     </div>
 
   </div>
-</div>
+</div> --}}
 
-
+<p class="text-center"> Real Time Products</p>
 <div class="container">
-  <div class="row">
-    {{#each Products}}
-    <div class="col-lg-4 d-flex justify-content-center align-item-center p-5">
-      <div class="card shadow" style="width: 18rem;">
-        <img src="{{thumbnail}}" class="card-img-top" alt="thumbnail: {{thumbnail}}">
-        <div class="card-body">
-          <h5 class="card-title">Title: {{title}}</h5>
-          <p class="card-text">Description: {{description}}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price: {{price}}</li>
-          <li class="list-group-item">Status: {{status}}</li>
-          <li class="list-group-item">Category: {{category}}</li>
-        </ul>
-      </div>
-    </div>
-    {{/each }}
+  <div class="row" id="products-container">
+    {{!-- PRODUCTS HERE --}}
   </div>
 </div>
 
