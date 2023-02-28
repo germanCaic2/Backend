@@ -3,15 +3,14 @@ const socket = io();
 socket.emit('client:message', 'HI I AM A NEW USER CONNECTED');
 
 setInterval(() => {
-  socket.emit('client:products');
-}, 3000);
+  socket.emit('client:products');}, 3000);
 
 socket.on('server:products', async (Products) => {
-  addProductsToRealTime(Products)
+  addProductsToRealTime(Products);
 });
 
 const addProductsToRealTime = (products) => {
-  let html = ''
+  let html = '';
   products.forEach(p => {
     html += `
     <div class="col-lg-4 d-flex justify-content-center align-item-center p-5">

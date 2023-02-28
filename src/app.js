@@ -7,7 +7,6 @@ import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
 import ProductManager from './ProductManager.js';
 
-
 const app = express();
 const productManager = new ProductManager();
 productManager.getProducts();
@@ -41,6 +40,6 @@ socketServer.on('connection', socket => {
 
   socket.on('client:products', async ()=> {
     const Products =  await productManager.getProducts();
-    socket.emit('server:products', Products)
-  })
+    socket.emit('server:products', Products);
+  });
 });
