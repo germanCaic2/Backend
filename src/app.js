@@ -35,25 +35,12 @@ const httpServer = app.listen(SERVER_PORT, () => {
 const socketServer = new Server(httpServer);
 
 socketServer.on('connection', socket => {
-  console.log("new user conected:", socket.id);
+  console.log('new user conected:', socket.id);
 
-  socket.on("client:message", data => {
-    console.log("-------------------------------")
-    console.log(data);
-  });
+  socket.on('client:message', msg => { console.log(msg); });
 
-  socket.on('client:products', async (data) => {
-    console.log(data)
-    socket.emit('server:productsUp', await productManager.products)
-  });
-
-  socket.on('client:productsUpdate', async (data) => {
-    // await productManager.getProducts()
-    if (JSON.stringify(data) !== JSON.stringify(await productManager.products)) {
-      socket.emit('server:updateProducts', true);
-    } else {
-      console.log("Productos iguales, no hay actualizaciones")
-      socket.emit('server:updateProducts', false)
-    }
-  });
+  socket.on('client:products', async ()=> {
+    const Products =  await productManager.getProducts();
+    socket.emit('server:products', Products)
+  })
 });
