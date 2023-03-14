@@ -1,6 +1,7 @@
 import express from 'express';
 import __dirname from './util.js';
 import { Server } from 'socket.io';
+import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
@@ -31,6 +32,17 @@ const httpServer = app.listen(SERVER_PORT, () => {
   console.log(__dirname);
 });
 
+const connectMongoDB = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://germanCaiced6:123@coderbackend.yddnh5p.mongodb.net/ecommerce?retryWrites=true&w=majority');
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("cant connect to MongoDB" + error);
+    process.exit();
+  }
+};
+connectMongoDB();
+
 const socketServer = new Server(httpServer);
 
 socketServer.on('connection', socket => {
@@ -38,8 +50,8 @@ socketServer.on('connection', socket => {
 
   socket.on('client:message', msg => { console.log(msg); });
 
-  socket.on('client:products', async ()=> {
-    const Products =  await productManager.getProducts();
+  socket.on('client:products', async () => {
+    const Products = await productManager.getProducts();
     socket.emit('server:products', Products);
   });
 });
