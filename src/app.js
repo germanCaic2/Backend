@@ -6,7 +6,7 @@ import handlebars from 'express-handlebars';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
-import ProductManager from './ProductManager.js';
+import ProductManager from './dao/filesystem/ProductManager.js';
 
 const app = express();
 const productManager = new ProductManager();

@@ -130,16 +130,5 @@
     "stock": 23,
     "category": "Running",
     "status": true
-  },
-  {
-    "id": 12,
-    "title": "Lewis",
-    "description": "Hola soy un zapato, porque esto es una tienda de zapatos",
-    "code": 7244,
-    "price": "99999999999999999",
-    "status": true,
-    "stock": "1",
-    "category": "Humano",
-    "thumbnail": "/img/lewis.png"
   }
 ]
