@@ -65,6 +65,7 @@ router.put(`/:pid`, async (req, res) => {
 router.delete(`/:pid`, async (req, res) => {
   try {
     let { pid } = req.params;
+    await productManager.deleteProduct(id);
     let result = await productsModel.deleteOne({ _id: pid });
     res.send({ status: "success product was deleted", payload: result });
   } catch (error) {
