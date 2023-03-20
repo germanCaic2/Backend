@@ -39,7 +39,7 @@ router.post(`/`, async (req, res) => {
   try {
     let { title, description, price, status, stock, category, thumbnail } = req.body;
     if (!title || !description || !price || !status || !stock || !category || !thumbnail) return res.send({ status: "error", error: "Incomplete values" });
-    productManager.addProduct(title, description, price, status, stock, category, thumbnail);
+    await productManager.addProduct(title, description, price, status, stock, category, thumbnail);
     let product = await productsModel.create({ title, description, price, status, stock, category, thumbnail });
     res.send({ status: "success", payload: product });
   } catch (error) {
@@ -52,8 +52,8 @@ router.put(`/:pid`, async (req, res) => {
   try {
     let { pid } = req.params;
     let productUpdated = req.body;
-    if (!productUpdated.title || !productUpdated.description || !productUpdated.price || !productUpdated.status || !productUpdated.stock || !productUpdated.category || !productUpdated.thumbnail)
-      return res.send({ status: "error", error: "Incomplete values" });
+    if (!productUpdated.title || !productUpdated.description || !productUpdated.price || !productUpdated.status || !productUpdated.stock || !productUpdated.category || !productUpdated.thumbnail) return res.send({ status: "error", error: "Incomplete values" });
+    await productManager.updateProduct(parseInt(pid), productUpdated);
     let result = await productsModel.updateOne({ _id: pid }, productUpdated);
     res.send({ status: "success", payload: result });
   } catch (error) {
