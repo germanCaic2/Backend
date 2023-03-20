@@ -22,7 +22,7 @@ router.get(`/:pid`, async (req, res) => {
   try {
     let { pid } = req.params;
     let result = await productManager.getProductById(pid)
-    
+
     if (result) {
       res.send({ status: "success", payload: result });
     } else {
@@ -39,6 +39,7 @@ router.post(`/`, async (req, res) => {
   try {
     let { title, description, price, status, stock, category, thumbnail } = req.body;
     if (!title || !description || !price || !status || !stock || !category || !thumbnail) return res.send({ status: "error", error: "Incomplete values" });
+    productManager.addProduct(title, description, price, status, stock, category, thumbnail);
     let product = await productsModel.create({ title, description, price, status, stock, category, thumbnail });
     res.send({ status: "success", payload: product });
   } catch (error) {
