@@ -1,7 +1,10 @@
 import { Router } from 'express';
-import { productsModel } from '../dao/DB/models/products.models.js'
+import { productsModel } from '../dao/models/products.models.js'
+import ProductManager from '../dao/Dao/ProductManager.js';
 
 const router = Router();
+const productManager = new ProductManager()
+productManager.getProducts();
 
 // get the products
 router.get(`/`, async (req, res) => {
@@ -18,8 +21,14 @@ router.get(`/`, async (req, res) => {
 router.get(`/:pid`, async (req, res) => {
   try {
     let { pid } = req.params;
-    let result = await productsModel.findById({ _id: pid });
-    res.send({ status: "success", payload: result });
+    let result = await productManager.getProductById(pid)
+    
+    if (result) {
+      res.send({ status: "success", payload: result });
+    } else {
+      let result = await productsModel.findById({ _id: pid });
+      res.send({ status: "success", payload: result });
+    }
   } catch (error) {
     console.error("The product cant be finded by specific ID" + error);
   };

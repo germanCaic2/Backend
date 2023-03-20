@@ -1,12 +1,12 @@
 import express from 'express';
-import __dirname from './util.js';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
+import __dirname from './util.js';
 import handlebars from 'express-handlebars';
+import ProductManager from './dao/Dao/ProductManager.js';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
-import ProductManager from './dao/filesystem/ProductManager.js';
 
 const app = express();
 const productManager = new ProductManager();
