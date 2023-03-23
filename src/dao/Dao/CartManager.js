@@ -8,7 +8,7 @@ class Cart {
 };
 
 class CartManager {
-  static cartsDirPath = "./database";
+  static cartsDirPath = "./src/database";
   static cartsFilePath = CartManager.cartsDirPath + "/carts.json";
 
   constructor() {
@@ -85,7 +85,7 @@ class CartManager {
       existingCart.products.push(item);
       console.log(`Product with ID: ${product.id} has been added to cart with ID: ${id}.`);
     };
-  
+    return existingCart
     await fs.promises.writeFile(CartManager.cartsFilePath, JSON.stringify(this.cart));
   };
 };

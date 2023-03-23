@@ -22,7 +22,7 @@ router.get(`/:pid`, async (req, res) => {
   try {
     let { pid } = req.params;
     let result = await productManager.getProductById(pid)
-
+    // if the product is not found in fs it will look for it in mongo
     if (result) {
       res.send({ status: "success", payload: result });
     } else {
