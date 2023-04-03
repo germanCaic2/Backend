@@ -17,7 +17,6 @@ router.get(`/realtimeproducts/`, async (req, res) => {
   res.render('realTimeProducts');
 });
 
-
 // get the products
 router.get("/products", async (req, res) => {
   try {
@@ -38,10 +37,11 @@ router.get("/products", async (req, res) => {
       prevLink: prod.hasPrevPage != false ? `http://localhost:8080/api/views/products?limit=${(limit ? limit : 10)}&page=${parseInt((page ? page : 1)) - 1}&sort=${(sort ? sort : { price: 1 })}` : null,
       nextLink: prod.hasNextPage != false ? `http://localhost:8080/api/views/products?limit=${(limit ? limit : 10)}&page=${parseInt((page ? page : 1)) + 1}&sort=${(sort ? sort : { price: 1 })}` : null,
     }
-    res.render('products', {resultProducts: resultProducts.payload});
+    res.render('products', {resultProducts: resultProducts});
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: "Error al consultar los productos", message: error });
   }
 });
+
 export default router;

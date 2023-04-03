@@ -2,22 +2,25 @@
 <div class="container">
   <div class="row">
     {{log resultProducts}}
+    {{log resultProducts.payload}}
 
-    {{#each resultProducts}}
-    <div class="col-lg-3 d-flex justify-content-center align-item-center p-2">
+    {{#each resultProducts.payload}}
+    <div class="col-3 d-flex justify-content-center align-item-center p-2">
       <div class="card shadow" style="width: 18rem;">
-        <img src="{{thumbnail}}" class="card-img-top" alt="thumbnail: {{thumbnail}}">
+        <img src="{{this.thumbnail}}" class="card-img-top" alt="thumbnail: {{this.thumbnail}}">
         <div class="card-body">
-          <h5 class="card-title">Title: {{title}}</h5>
-          <p class="card-text">Description: {{description}}</p>
+          <h5 class="card-title">Title: {{this.title}}</h5>
+          <p class="card-text">Description: {{this.description}}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price: {{price}}</li>
-          <li class="list-group-item">Status: {{status}}</li>
-          <li class="list-group-item">Category: {{category}}</li>
+          <li class="list-group-item">Price: {{this.price}}</li>
+          <li class="list-group-item">Status: {{this.status}}</li>
+          <li class="list-group-item">Category: {{this.category}}</li>
         </ul>
       </div>
     </div>
     {{/each }}
 
+    <a href="{{resultProducts.prevLink}}" {{#unless resultProducts.hasPrevPage}}disabled{{/unless}}>Previous Page</a>
+    <a href="{{resultProducts.nextLink}}" {{#unless resultProducts.hasNextPage}}disabled{{/unless}}>Next Page</a>
   </div>
