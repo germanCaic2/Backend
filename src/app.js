@@ -7,6 +7,7 @@ import ProductManager from './dao/Dao/ProductManager.js';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
+// import cookieParser from 'cookie-parser';
 
 const app = express();
 const productManager = new ProductManager();
@@ -25,6 +26,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(`/api/products`, ProductsRouter);
 app.use(`/api/carts`, CartsRouter);
 app.use(`/api/views`, ViewsRouter);
+//cookie
+// app.use(cookieParser());
 
 const SERVER_PORT = 8080;
 const httpServer = app.listen(SERVER_PORT, () => {

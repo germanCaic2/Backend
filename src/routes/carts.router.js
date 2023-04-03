@@ -39,16 +39,12 @@ router.get(`/:cid`, async (req, res) => {
 router.post(`/:cid/product/:pid`, async (req, res) => {
   let cid = req.params.cid;
   let pid = req.params.pid;
-  let c = await cartManager.getCartById(cid);
-  let p = await productManager.getProductById(pid);
-  let result = await cartManager.cartBuilder(c, p);
 
-  if (result) {
-    res.send({ status: "success", payload: result });
-  } else {
-    // falta funcion de mongo que haga esto
-    res.send({ status: "success", payload: result });
-  }
+  let cart = await cartsModel.findOne({_id: cid})
+  cart.products.push({product: pid})
+  let result = await cartsModel.updateOne(cart)
+  console.log(result)
+  res.send({ status: "success", payload: result });
 });
 
 export default router;
