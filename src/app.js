@@ -2,7 +2,7 @@ import express from 'express';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
-// import session from 'express-session'
+import session from 'express-session'
 import cookieParser from 'cookie-parser';
 import __dirname from './util.js';
 import ProductManager from './dao/Dao/ProductManager.js';
@@ -27,11 +27,11 @@ app.use(express.static(__dirname + '/public'));
 //cookie
 app.use(cookieParser('secret'));
 //Session management
-// app.use(session({
-//   secret: 'secretCoder',
-//   resave: true,
-//   saveUninitialized: true
-// }));
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
 
 // Routers
 app.use(`/api/products`, ProductsRouter);
