@@ -4,7 +4,9 @@
 </nav>
 <div class="container">
   <div class="row">
-    {{#each Products}}
+    {{log products}}
+
+    {{#each products}}
     <div class="col-lg-3 d-flex justify-content-center align-item-center p-2">
       <div class="card shadow" style="width: 18rem;">
         <img src="{{thumbnail}}" class="card-img-top" alt="thumbnail: {{thumbnail}}">
@@ -20,5 +22,6 @@
       </div>
     </div>
     {{/each }}
+
   </div>
 </div>
