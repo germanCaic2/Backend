@@ -1,27 +1,13 @@
 <nav class="bg-dark d-flex justify-content-around shadow mb-2">
-  <h3 class="text-light">German Caicedo</h3>
-  <h3 class="text-light">Backend</h3>
+  <h3 class="text-light">Hi: {{user.username}}</h3>
+  <h3 class="text-light">Email: {{user.email}}</h3>
 </nav>
+
 <div class="container">
-  <div class="row">
-    {{log products}}
-
-    {{#each products}}
-    <div class="col-lg-3 d-flex justify-content-center align-item-center p-2">
-      <div class="card shadow" style="width: 18rem;">
-        <img src="{{thumbnail}}" class="card-img-top" alt="thumbnail: {{thumbnail}}">
-        <div class="card-body">
-          <h5 class="card-title">Title: {{title}}</h5>
-          <p class="card-text">Description: {{description}}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price: {{price}}</li>
-          <li class="list-group-item">Status: {{status}}</li>
-          <li class="list-group-item">Category: {{category}}</li>
-        </ul>
-      </div>
-    </div>
-    {{/each }}
-
+  <div class="row" id="products-container">
+    {{!-- PRODUCTS HERE --}}
   </div>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
