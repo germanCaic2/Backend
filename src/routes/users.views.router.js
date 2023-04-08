@@ -10,8 +10,8 @@ router.get('/register', (req, res)=>{
   res.render('register');
 });
 
-router.get('/', (req, res)=>{
-  res.render('profile', {
+router.get('/', async (req, res)=>{
+  res.render('home', {
     user: req.session.user
   });
 });

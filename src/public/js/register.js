@@ -12,4 +12,5 @@ registerFrom.addEventListener('submit', e => {
       'Content-Type': 'application/json'
     }
   }).then(result => result.json()).then(json => console.log(json))
+  window.location.replace('/users/login')
 });

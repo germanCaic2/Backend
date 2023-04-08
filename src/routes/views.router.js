@@ -13,7 +13,7 @@ router.get(`/`, async (req, res) => {
 });
 
 // Show all products in realTime
-router.get(`/realtimeproducts/`, async (req, res) => {
+router.get(`/realtimeproducts`, async (req, res) => {
   res.render('realTimeProducts');
 });
 
