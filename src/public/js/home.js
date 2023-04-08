@@ -1,9 +1,11 @@
 const productsContainer = document.querySelector('#products-container');
+const logout = document.querySelector('#logout')
 const socket = io();
 socket.emit('client:message', 'HI I AM A NEW USER CONNECTED');
 
 setInterval(() => {
-  socket.emit('client:products');}, 5000);
+  socket.emit('client:products');
+}, 5000);
 
 socket.on('server:products', async (Products) => {
   addProductsToRealTime(Products);
@@ -30,3 +32,5 @@ const addProductsToRealTime = (products) => {
     productsContainer.innerHTML = html;
   });
 };
+
+logout.addEventListener('click', e => { window.location.replace('/users/login'); });

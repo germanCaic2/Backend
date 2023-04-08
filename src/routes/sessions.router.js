@@ -16,7 +16,8 @@ router.post('/register', async (req, res) => {
       username,
       age,
       email,
-      password
+      password,
+      rol: 'user',
     };
     const result = await userModel.create(user);
     res.send({ status: "Success", message: "User was created successfull with ID:" + result.id });
@@ -34,7 +35,8 @@ router.post('/login', async (req, res) => {
     req.session.user = {
       username: `${user.username}`,
       email: user.email,
-      age: user.age
+      age: user.age,
+      rol: user.rol
     }
     res.send({ status: "Success", payload: req.session.user, message: "User logging successfull" });
   } catch (error) {

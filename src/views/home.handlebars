@@ -1,8 +1,11 @@
-<nav class="bg-dark d-flex justify-content-around shadow mb-2">
-  <h3 class="text-light">Hi: {{user.username}}</h3>
-  <h3 class="text-light">Email: {{user.email}}</h3>
+<nav class="bg-dark d-flex justify-content-around shadow mb-2 p-2">
+  <h5 class="text-light">Hi {{user.rol}} : {{user.username}} </h5>
+  <div class="d-flex">
+    <p class="text-light">Email: {{user.email}}</p>
+    <button type="button" class="btn btn-primary" id="logout">log out</button>
+  </div>
 </nav>
-
+{{log user}}
 <div class="container">
   <div class="row" id="products-container">
     {{!-- PRODUCTS HERE --}}
