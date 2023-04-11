@@ -5,6 +5,8 @@ import MongoStore from 'connect-mongo'
 import handlebars from 'express-handlebars';
 import session from 'express-session'
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import initializePassport from './config/passport.config.js';
 // import FileStore from 'session-file-store';
 import __dirname from './util.js';
 import ProductManager from './dao/Dao/ProductManager.js';
@@ -39,13 +41,18 @@ app.use(session({
   // store: new fileStorage({path: "./sessions", retries: 0}),
   store: MongoStore.create({
     mongoUrl: MONGO_URL,
-    mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
+    mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
     ttl: 30,
   }),
   secret: 'secret',
   resave: false,
   saveUninitialized: true
 }));
+
+//Middleware passport
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routers
 app.use(`/api/products`, ProductsRouter);

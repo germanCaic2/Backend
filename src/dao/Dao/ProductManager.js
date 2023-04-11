@@ -52,8 +52,6 @@ class ProductManager {
     try {
       await this.fileCreator();
       let productsPath = await fs.promises.readFile(ProductManager.productsFilePath, "utf-8");
-      console.info("JSON file obtained from file:");
-      console.log(productsPath);
       this.products = JSON.parse(productsPath);
       console.log(this.products);
       return this.products;
