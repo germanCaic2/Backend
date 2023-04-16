@@ -9,13 +9,14 @@ import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 // import FileStore from 'session-file-store';
 import __dirname from './util.js';
-import ProductManager from './dao/Dao/ProductManager.js';
+import ProductManager from './dao/ProductManager.js';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
 import CookieRouter from './routes/cookie.router.js'
 import usersViewRouter from './routes/users.views.router.js'
 import sessionsRouter from './routes/sessions.router.js'
+import githubLogin from './routes/github-login.views.router.js'
 
 // const fileStorage = FileStore(session)
 const app = express();
@@ -61,6 +62,7 @@ app.use(`/api/cookie`, CookieRouter);
 app.use(`/api/session`, sessionsRouter);
 app.use(`/views`, ViewsRouter);
 app.use(`/users`, usersViewRouter);
+app.use(`/github`, githubLogin);
 
 //server init
 const httpServer = app.listen(SERVER_PORT, () => {

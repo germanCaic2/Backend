@@ -1,14 +1,17 @@
-<div class="container justify-content-center">
-    <h1>Login</h1>
-    <form id="loginForm">
-      <lable> Email </lable>
-      <input name="email">
-      <br />
-      <lable> Password </lable>
-      <input name="password" type="password">
-      <input type="submit">
-    </form>
-    <p>are you not registered?<a href="/users/register"> sign up here </a></p>
+<div class="container d-flex flex-column align-items-center m-5">
+      <div class="border p-5 rounded-5">
+        <h1>Login</h1>
+        <form id="loginForm">
+          <lable> Email </lable>
+          <input name="email">
+          <br />
+          <lable> Password </lable>
+          <input name="password" type="password">
+          <input type="submit">
+        </form>
+        <p>Are you not registered?<a href="/users/register"> Sign up here </a></p>
+        <p>Do you have a gitHub account? <a href="/github/login">Sign in with gitHub</a></p>
+      </div>
 </div>
 
 <script src="/js/login.js"></script>
