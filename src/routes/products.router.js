@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { productsModel } from '../dao/models/products.models.js'
-import ProductManager from '../dao/Dao/ProductManager.js';
+import { productsModel } from '../models/products.models.js'
+import ProductManager from '../dao/ProductManager.js';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const router = Router();

@@ -5,15 +5,19 @@ import MongoStore from 'connect-mongo'
 import handlebars from 'express-handlebars';
 import session from 'express-session'
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import initializePassport from './config/passport.config.js';
+
 // import FileStore from 'session-file-store';
 import __dirname from './util.js';
-import ProductManager from './dao/Dao/ProductManager.js';
+import ProductManager from './dao/ProductManager.js';
 import ProductsRouter from './routes/products.router.js';
 import CartsRouter from './routes/carts.router.js';
 import ViewsRouter from './routes/views.router.js';
 import CookieRouter from './routes/cookie.router.js'
 import usersViewRouter from './routes/users.views.router.js'
 import sessionsRouter from './routes/sessions.router.js'
+import githubLogin from './routes/github-login.views.router.js'
 
 // const fileStorage = FileStore(session)
 const app = express();
@@ -39,13 +43,18 @@ app.use(session({
   // store: new fileStorage({path: "./sessions", retries: 0}),
   store: MongoStore.create({
     mongoUrl: MONGO_URL,
-    mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
+    mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
     ttl: 30,
   }),
   secret: 'secret',
   resave: false,
   saveUninitialized: true
 }));
+
+//Middleware passport
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routers
 app.use(`/api/products`, ProductsRouter);
@@ -54,6 +63,7 @@ app.use(`/api/cookie`, CookieRouter);
 app.use(`/api/session`, sessionsRouter);
 app.use(`/views`, ViewsRouter);
 app.use(`/users`, usersViewRouter);
+app.use(`/github`, githubLogin);
 
 //server init
 const httpServer = app.listen(SERVER_PORT, () => {
