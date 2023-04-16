@@ -53,7 +53,7 @@ class ProductManager {
       await this.fileCreator();
       let productsPath = await fs.promises.readFile(ProductManager.productsFilePath, "utf-8");
       this.products = JSON.parse(productsPath);
-      console.log(this.products);
+      console.log(productsPath);
       return this.products;
     } catch (error) {
       console.error(`Error consulting the products by file, validate the file: ${this.products},error detail ${error}`);

@@ -21,7 +21,7 @@ const initializePassport = () => {
         console.log(user);
         if (!user) {
           console.warn("User doesn't exists with username: " + profile._json.email);
-          let newUser = {
+          let user = {
             firstName: profile._json.name,
             lastName: '',
             age: 18,
@@ -29,7 +29,7 @@ const initializePassport = () => {
             password: '',
             loggedBy: "GitHub"
           };
-          const result = await userModel.create(newUser);
+          const result = await userModel.create(user);
           return done(null, result);
         } else {
           //user already exist

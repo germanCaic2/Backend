@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userModel from '../models/user.models.js';
 import { createHash, isValidPassword } from '../util.js';
 import passport from 'passport';
+import { generateJWToken } from '../util.js';
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get("/github", passport.authenticate('github', { scope: ['user:email'] })
 router.get("/githubcallback", passport.authenticate('github', { failureRedirect: '/github/error' }), async (req, res) => {
   const user = req.user;
   req.session.user = {
-    name: `${user.first_name} ${user.last_name}`,
+    name: `${user.firstName} ${user.lastName}`,
     email: user.email,
     age: user.age
   };
@@ -25,28 +26,30 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
 );
 
 router.post('/login', passport.authenticate(
-  'login', {failureRedirect: '/api/session/fail-login'})
+  'login', { failureRedirect: '/api/session/fail-login' })
   , async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await userModel.findOne({ email });
-    console.log(user);
-    if (!user) return res.status(401).send({ status: 'error', message: 'Inccorrect credentials.' });
-    if (!isValidPassword(user, password)) {
-      return res.status(401).send({ status: 'error', message: 'Inccorrect credentials.' });
+    try {
+      const { email, password } = req.body;
+      const user = await userModel.findOne({ email });
+      console.log(user);
+      if (!user) return res.status(401).send({ status: 'error', message: 'Inccorrect credentials.' });
+      if (!isValidPassword(user, password)) {
+        return res.status(401).send({ status: 'error', message: 'Inccorrect credentials.' });
+      };
+      // req.session.user = {
+      //   name: `${user.firstName} ${user.lastName}`,
+      //   email: user.email,
+      //   age: user.age,
+      //   cart: user.cart,
+      //   role: user.role
+      // };
+      const accessToken = generateJWToken(user);
+      console.log(accessToken);
+      res.send({ accessToken: accessToken });
+    } catch (error) {
+      console.error(error);
+      res.send({ error: "failed to login user", message: error });
     };
-    req.session.user = {
-      name: `${user.firstName} ${user.lastName}`,
-      email: user.email,
-      age: user.age,
-      cart: user.cart,
-      role: user.role
-    };
-    res.send({ status: "Success", payload: req.session.user, message: "User logging successfull" });
-  } catch (error) {
-    console.error(error);
-    res.send({ error: "failed to login user", message: error });
-  };
-});
+  });
 
 export default router;
